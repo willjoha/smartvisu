@@ -10,6 +10,7 @@
 
 
 require_once const_path_system.'service.php';
+require_once const_path_system.'contact/contact.php';
 
 
 /**
@@ -29,6 +30,9 @@ class phone extends service
 		$this->port = config_phone_port;
 		$this->user = config_phone_user;
 		$this->pass = config_phone_pass;
+		
+		$contact_class = 'contact_'.config_contact_service;
+		$this->contacts = new $contact_class($request);
 	}
 
 	/**
@@ -42,14 +46,9 @@ class phone extends service
 			{
 				// date
 				$ds['date'] = transdate('short', strtotime($ds['date']));
-
-				// is there a picture to the caller?
-				if ($ds['number'] != '' and is_file(const_path.'pics/phone/'.$ds['number'].'.jpg'))
-					$ds['pic'] = $ds['number'].'.jpg';
-				elseif ($ds['number'] != '' and is_file(const_path.'pics/phone/'.$ds['number'].'.png'))
-					$ds['pic'] = $ds['number'].'.png';
-				else
-					$ds['pic'] = '0.jpg';
+				
+				// lookup contact
+				$this->contacts->getContact($ds['number'], $ds['name'], $ds['type'], $ds['pic']);
 
 				$ds['text'] = $ds['name'];
 

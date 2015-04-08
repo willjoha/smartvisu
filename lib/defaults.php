@@ -177,6 +177,17 @@ define ('config_calendar_url', 'http://www.google.com/calendar/feeds/...');
 define ('config_codepad_code', '');
 
 
+/**
+ * Which contact service should be used?
+ * @value    offline: contacts from the lib/contact/data/offline.csv
+ */
+define ('config_contact_service', 'offline');
+
+/**
+ * What is the private url?
+ */
+define ('config_contact_url', '');
+
 
 // -----------------------------------------------------------------------------
 // O P T I M A T I O N S

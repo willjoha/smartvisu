@@ -272,6 +272,32 @@
 
 		</div>
 	</div>
+	
+	<div class="block">
+		<div class="set-1" data-role="collapsible-set" data-theme="c" data-content-theme="a" data-mini="true">
+
+			<div data-role="collapsible" data-collapsed="false">
+				<h3>Contact</h3>
+
+				<div data-role="fieldcontain">
+					<label for="contact_service">System</label>
+					<select name="contact_service" id="contact_service" data-native-menu="false">
+						{% for file in dir('lib/contact/service', '(.+?).php') %}
+							<option value="{{ file.name }}">{{ file.label }}</option>
+						{% endfor %}
+					</select>
+					{{ forms.select_init('contact_service', config_contact_service) }}
+				</div>
+
+				<div data-role="fieldcontain">
+					<label for="contact_url">Url</label>
+					<input type="text" name="contact_url" id="contact_url" />
+					{{ forms.text_init('contact_url', config_contact_url|e ) }}
+				</div>
+			</div>
+
+		</div>
+	</div>
 
 
 	</fieldset>
